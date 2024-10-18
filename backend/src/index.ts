@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import trackerRouter from "./Routes/tracker";
 import userRouter from "./Routes/user";
@@ -26,3 +26,5 @@ app.use(auth);
 app.listen(port, () => {
     log.info(`The server is running on ${port}`);
 });
+
+export default app;
