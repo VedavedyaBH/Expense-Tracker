@@ -1,0 +1,144 @@
+{
+    "routes": {
+        "register": {
+            "method": "POST",
+            "path": "/api/v1/register",
+            "description": "Creates a new user and sends a verification email.",
+            "requestBody": {
+                "type": "application/json",
+                "properties": {
+                    "nickname": {
+                        "type": "string",
+                        "description": "The nickname of the user."
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "The user's password."
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "The email address of the user."
+                    }
+                },
+                "required": ["nickname", "password", "email"]
+            },
+            "responses": {
+                "201": {
+                    "description": "User successfully created."
+                },
+                "500": {
+                    "description": "Bad request, something went wrong."
+                }
+            }
+        },
+        "verify": {
+            "method": "POST",
+            "path": "/api/v1/verify/:id/:verificationCode",
+            "description": "Verifies a user based on ID and verification code.",
+            "parameters": {
+                "id": {
+                    "type": "string",
+                    "description": "The ID of the user."
+                },
+                "verificationCode": {
+                    "type": "string",
+                    "description": "The verification code sent to the user."
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "User successfully verified."
+                },
+                "500": {
+                    "description": "Could not verify user."
+                }
+            }
+        },
+        "forgotPassword": {
+            "method": "POST",
+            "path": "/api/v1/forgot-password",
+            "description": "Sends a password reset code to the user's email.",
+            "requestBody": {
+                "type": "application/json",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "The email address of the user."
+                    }
+                },
+                "required": ["email"]
+            },
+            "responses": {
+                "200": {
+                    "description": "Code sent successfully."
+                },
+                "500": {
+                    "description": "User does not exist or is not verified."
+                }
+            }
+        },
+        "resetPassword": {
+            "method": "POST",
+            "path": "/api/v1/reset-password/:id/:passwordResetCode",
+            "description": "Resets the user's password.",
+            "parameters": {
+                "id": {
+                    "type": "string",
+                    "description": "The ID of the user."
+                },
+                "passwordResetCode": {
+                    "type": "string",
+                    "description": "The password reset code sent to the user."
+                }
+            },
+            "requestBody": {
+                "type": "application/json",
+                "properties": {
+                    "password": {
+                        "type": "string",
+                        "description": "The new password for the user."
+                    }
+                },
+                "required": ["password"]
+            },
+            "responses": {
+                "200": {
+                    "description": "Password successfully reset."
+                },
+                "500": {
+                    "description": "Could not reset user password."
+                }
+            }
+        },
+        "login": {
+            "method": "POST",
+            "path": "/api/v1/login",
+            "description": "Authenticates a user and creates a session.",
+            "requestBody": {
+                "type": "application/json",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "The email address of the user."
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "The user's password."
+                    }
+                },
+                "required": ["email", "password"]
+            },
+            "responses": {
+                "200": {
+                    "description": "User successfully logged in."
+                },
+                "500": {
+                    "description": "Invalid email or password."
+                }
+            }
+        }
+    }
+}
