@@ -25,7 +25,12 @@ function ForgotPassword() {
         try {
             const response = await axios.post<ForgotPasswordResponse>(
                 `${process.env.REACT_APP_SERVER_BASE_URL}/api/v1/forgotpassword`,
-                { email }
+                { email },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
             );
             if (response.status === 200) {
                 setResetCodeExists(true);
@@ -51,6 +56,11 @@ function ForgotPassword() {
                 `${process.env.REACT_APP_SERVER_BASE_URL}/api/v1/${id}/${passwordResetCode}`,
                 {
                     password,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 }
             );
             if (response.status === 200) {

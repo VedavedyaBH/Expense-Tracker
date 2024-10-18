@@ -21,7 +21,12 @@ function VerifyAccount() {
     const handleVerifyCode = async () => {
         try {
             const response = await axios.post<VerifyAccountResponse>(
-                `${process.env.REACT_APP_SERVER_BASE_URL}/api/v1/verify/${id}/${verificationCode}`
+                `${process.env.REACT_APP_SERVER_BASE_URL}/api/v1/verify/${id}/${verificationCode}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
             );
             if (response.status === 200) {
                 setMessage("Account verified successfully.");

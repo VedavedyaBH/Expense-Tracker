@@ -8,9 +8,16 @@ import log from "./logger";
 const app = express();
 const port = (process.env.PORT && parseInt(process.env.PORT.trim())) || 8080;
 
+const corsOptions = {
+    origin: "*",
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    allowedHeaders: ["Content-Type", "Authorization"],
+    optionsSuccessStatus: 200,
+};
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(trackerRouter);
 app.use(userRouter);

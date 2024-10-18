@@ -19,6 +19,11 @@ function Login() {
                 {
                     email,
                     password,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 }
             );
             if (response.status === 200) {

@@ -39,6 +39,11 @@ function SignUp() {
                     password,
                     passwordConfirmation,
                     nickname,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 }
             );
 
